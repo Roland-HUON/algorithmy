@@ -61,6 +61,7 @@ PersonnageC.nom + ", "+
 PersonnageD.nom + ", "+
 PersonnageE.nom);
 const morts = [];
+let mortscount = 0;
 while (Jason.hp > 0 && survivants.length > 0){
     let aleatoireAtk = Math.floor(Math.random()* survivants.length);
     let attack = survivants[aleatoireAtk];
@@ -71,6 +72,7 @@ while (Jason.hp > 0 && survivants.length > 0){
     if (destiny < attack["caracteristique"].deathDommages){
         Jason.hp = Jason.hp - 15;
         morts.push(attack);
+        mortscount++;
         survivants.splice(aleatoireAtk,1);
         // survivants.splice(attack, 1);
         console.log("Le survivant : " + attack["nom"] + " a infligé 15 de dégats à Jason mais il/elle est mort.");
@@ -80,16 +82,32 @@ while (Jason.hp > 0 && survivants.length > 0){
         console.log("Le survivant :" + attack["nom"] + " a esquivé et infligé 10 de dégats à Jason.");
     } else if (destiny <= (attack["caracteristique"].deathDommages + attack["caracteristique"].dommage + attack["caracteristique"].mort)){
         morts.push(attack);
+        mortscount++;
         survivants.splice(aleatoireAtk,1);
         // survivants.splice(attack, 1);
         console.log("Le personnage " + attack["nom"] + " est mort.");
         console.log(survivants);
     }
     if (Jason.hp<=0){
-        morts.forEach((name)=>{
-            console.log("Les survivants ont gagnés mais RIP à " + name +".");
-        })
-        break;
+        switch(mortscount){
+            case 1:
+                console.log("Les survivants ont gagnés mais RIP à " + morts[0]["nom"] +".");
+                break;
+            case 2:
+                console.log("Les survivants ont gagnés mais RIP à " + morts[0]["nom"] + ", " + morts[1]["nom"] +".");
+                break;
+            case 3:
+                console.log("Les survivants ont gagnés mais RIP à " + morts[0]["nom"] + ", " + morts[1]["nom"] + ", " + morts[2]["nom"] +".");
+                break;
+            case 4:
+                console.log("Les survivants ont gagnés mais RIP à " + morts[0]["nom"] + ", " + morts[1]["nom"] + ", " + morts[2]["nom"] + ", " + morts[3]["nom"] +".");
+                break;
+            case 5:
+                console.log("Les survivants ont gagnés mais RIP à " + morts[0]["nom"] + ", " + morts[1]["nom"] + ", " + morts[2]["nom"] + ", " + morts[3]["nom"] + ", " + morts[4]["nom"]+".");
+                break;
+            default:
+                console.log("Les survivants ont gagnés personne est mort!");
+        } 
     }
     if(survivants.length<=0){
         console.log("Jason a gagné");
