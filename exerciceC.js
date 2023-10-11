@@ -54,25 +54,30 @@ let PersonnageD = new Personnage (Perso[7], Perso[6]);
 let PersonnageE = new Personnage (Perso[9], Perso[8]); 
 
 const survivants = [PersonnageA, PersonnageB, PersonnageC, PersonnageD, PersonnageE];
+console.log("L'équipe est contitué de " + 
+PersonnageA.nom + ", " +
+PersonnageB.nom + ", "+ 
+PersonnageC.nom + ", "+ 
+PersonnageD.nom + ", "+
+PersonnageE.nom);
 const morts = [];
-while (Jason.hp > 0 && survivants !=null){
-    let aleatoireAtk = Math.floor(Math.random()* survivants.lenght);
+while (Jason.hp > 0 && survivants.length > 0){
+    let aleatoireAtk = Math.floor(Math.random()* survivants.length);
     let attack = survivants[aleatoireAtk];
     let destiny = Math.random(0,1);
-    console.log(attack);
-    console.log(survivants[aleatoireAtk].deathDommages);
-    if (destiny < attack.deathDommages){
+    console.log(survivants[aleatoireAtk]["caracteristique"].deathDommages);
+    if (destiny < attack["caracteristique"].deathDommages){
         Jason.hp = Jason.hp -15;
         morts.push(attack);
         survivants.splice(attack, 1);
-        console.log("Le survivant : " + attack + " a infligé 15 de dégats à Jason mais il est mort.");
+        console.log("Le survivant : " + attack["nom"] + " a infligé 15 de dégats à Jason mais il est mort.");
         survivants.splice(aleatoireAtk,1);
-    } else if (destiny < (attack.deathDommages + attack.dommage)){
-        console.log("Le survivant :" + attack + " a esquivé et infligé 10 de dégats à Jason.");
-    } else if (destiny <= (attack.deathDommages + attack.dommage + attack.mort)){
+    } else if (destiny < (attack["caracteristique"].deathDommages + attack["caracteristique"].dommage)){
+        console.log("Le survivant :" + attack["nom"] + " a esquivé et infligé 10 de dégats à Jason.");
+    } else if (destiny <= (attack["caracteristique"].deathDommages + attack["caracteristique"].dommage + attack["caracteristique"].mort)){
         morts.push(attack);
         survivants.splice(attack, 1);
-        console.log("Le personnage " + attack + " est mort.");
+        console.log("Le personnage " + attack["nom"] + " est mort.");
     }
     if (Jason.hp<=0){
         morts.forEach((name)=>{
@@ -80,7 +85,7 @@ while (Jason.hp > 0 && survivants !=null){
         })
         break;
     }
-    if(survivants = null){
+    if(survivants.length<=0){
         console.log("Jason a gagné");
         break;
     }
