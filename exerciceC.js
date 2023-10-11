@@ -73,6 +73,10 @@ while (Jason.hp > 0 && survivants.length > 0){
         morts.push(attack);
         survivants.splice(attack, 1);
         console.log("Le survivant : " + attack["nom"] + " a infligé 15 de dégats à Jason mais il est mort.");
+        survivants.forEach((name)=>{
+            console.log(name["name"]);
+        })
+        // console.log(survivants);
         survivants.splice(aleatoireAtk,1);
     } else if (destiny < (attack["caracteristique"].deathDommages + attack["caracteristique"].dommage)){
         Jason.hp = Jason.hp - 10;
@@ -81,6 +85,10 @@ while (Jason.hp > 0 && survivants.length > 0){
         morts.push(attack);
         survivants.splice(attack, 1);
         console.log("Le personnage " + attack["nom"] + " est mort.");
+        survivants.forEach((name)=>{
+            console.log(name["name"]);
+        })
+        // console.log(survivants);
     }
     if (Jason.hp<=0){
         morts.forEach((name)=>{
