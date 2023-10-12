@@ -33,7 +33,7 @@ let Leader = new pouvoir("Leader", 0.1, 0.7, 0.2);
 const nom = ["Fred", "Lisa", "Leafa", "George", "Robert", "Pierrick", "Steave", "Élise"];
 const caracteristique = [Nerd, Blonde, Sportif, Mangeur, Solo, Alpha, Victime, Leader];
 
-const Perso=[];
+let Perso=[];
 for (let i=0; i<5; i++){
     let aleatoirePv = Math.floor(Math.random() * caracteristique.length);
     let Pv = caracteristique[aleatoirePv];
