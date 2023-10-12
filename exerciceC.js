@@ -30,8 +30,8 @@ let Solo = new pouvoir("Solo", 0.3, 0.3, 0.4);
 let Alpha = new pouvoir("Alpha", 0.5, 0.25, 0.25);
 let Victime = new pouvoir("Victime", 0.9, 0.02, 0.08);
 let Leader = new pouvoir("Leader", 0.1, 0.7, 0.2);
-const nom = ["Fred", "Lisa", "Leafa", "George", "Robert", "Pierrick", "Steave", "Élise"];
-const caracteristique = [Nerd, Blonde, Sportif, Mangeur, Solo, Alpha, Victime, Leader];
+let nom = ["Fred", "Lisa", "Leafa", "George", "Robert", "Pierrick", "Steave", "Élise"];
+let caracteristique = [Nerd, Blonde, Sportif, Mangeur, Solo, Alpha, Victime, Leader];
 
 let Perso=[];
 for (let i=0; i<5; i++){
@@ -52,14 +52,14 @@ let PersonnageC = new Personnage (Perso[5], Perso[4]);
 let PersonnageD = new Personnage (Perso[7], Perso[6]); 
 let PersonnageE = new Personnage (Perso[9], Perso[8]); 
 
-const survivants = [PersonnageA, PersonnageB, PersonnageC, PersonnageD, PersonnageE];
+let survivants = [PersonnageA, PersonnageB, PersonnageC, PersonnageD, PersonnageE];
 console.log("L'équipe est contitué de " + 
 PersonnageA.nom + ", " +
 PersonnageB.nom + ", "+ 
 PersonnageC.nom + ", "+ 
 PersonnageD.nom + ", "+
 PersonnageE.nom);
-const morts = [];
+let morts = [];
 let mortscount = 0;
 while (Jason.hp > 0 && survivants.length > 0){
     let aleatoireAtk = Math.floor(Math.random()* survivants.length);
