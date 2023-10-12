@@ -25,9 +25,9 @@ class Personnage{
 let Nerd = new pouvoir("Nerd", 0.4, 0.3, 0.3);
 let Blonde = new pouvoir("Blonde", 0.7, 0.15, 0.15);
 let Sportif = new pouvoir("Sportif", 0.19, 0.51, 0.3);
-let Mangeur = new pouvoir("Nerd", 0.3, 0.4, 0.4);
-let Solo = new pouvoir("Nerd", 0.3, 0.3, 0.4);
-let Alpha = new pouvoir("Nerd", 0.5, 0.25, 0.25);
+let Mangeur = new pouvoir("Mangeur", 0.3, 0.4, 0.4);
+let Solo = new pouvoir("Solo", 0.3, 0.3, 0.4);
+let Alpha = new pouvoir("Alpha", 0.5, 0.25, 0.25);
 let Victime = new pouvoir("Victime", 0.9, 0.02, 0.08);
 let Leader = new pouvoir("Leader", 0.1, 0.7, 0.2);
 const nom = ["Fred", "Lisa", "Leafa", "George", "Robert", "Pierrick", "Steave", "Élise"];
@@ -44,7 +44,6 @@ for (let i=0; i<5; i++){
     let name = nom[aleatoireNom];
     Perso.push(name);
     nom.splice(aleatoireNom,1);
-
 }
 console.log(Perso);
 let PersonnageA = new Personnage (Perso[1], Perso[0]); 
