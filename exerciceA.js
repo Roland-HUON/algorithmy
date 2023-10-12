@@ -24,7 +24,7 @@ while (Dracaufeu.hp > 0 && Tortank.hp > 0){
     console.log(luckDracaufeu);
 
     if (luckDracaufeu < Dracaufeu.luck){
-        const degatsDracaufeu = attack (Dracaufeu, Tortank);
+        let degatsDracaufeu = attack(Dracaufeu, Tortank);
         Tortank.hp = Tortank.hp - degatsDracaufeu;
         console.log("Tortank a subit :" + degatsDracaufeu + " de dégats.");
     } else {
@@ -41,7 +41,7 @@ while (Dracaufeu.hp > 0 && Tortank.hp > 0){
     let luckTortank = Tortank.isLuck();
     console.log(luckTortank);
     if (luckTortank < Tortank.luck){
-        const degatsTortank = attack (Tortank, Dracaufeu);
+        let degatsTortank = attack(Tortank, Dracaufeu);
         Dracaufeu.hp = Dracaufeu.hp - degatsTortank;
         console.log("Dracaufeu a subit :" + degatsTortank + " de dégats.");
     }
