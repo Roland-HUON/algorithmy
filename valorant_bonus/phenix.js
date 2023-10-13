@@ -125,10 +125,7 @@ let manch = (() =>{
             let randomAtk = Math.floor(Math.random()* attaquant.length);
             let randomDef = Math.floor(Math.random()* defenseur.length);
             let fate = Math.random(0,1);
-            let omenAccuracy = Math.random(0,1);
-            if (omenAccuracy <= smoke.win){
-                console.log("Omen a lancé : Smoke");
-                if (fate <= 0.6){
+            if (fate <= 0.5){
                     let attaque = attaquant[randomAtk];
                     let defense = defenseur[randomDef];   
                     defenseur.splice(randomDef,1);
@@ -136,26 +133,7 @@ let manch = (() =>{
                     console.log(defenseur);
                     mortsDefenseur.push(defense);
                     mortsDef++;
-                } else {
-                    let attaque = attaquant[randomAtk];
-                    let defense = defenseur[randomDef];   
-                    attaquant.splice(randomAtk,1);
-                    console.log("Le joueur défenseur " + defense["name"] + " a éliminé le joueur " + attaque["name"] + ".");
-                    console.log(attaquant);
-                    mortsAttaquant.push(attaque);
-                    mortsAtk++;
-                }
             } else {
-                console.log("Omen n'a pas lancé : Smoke. Report?");
-                if (fate <= 0.5){
-                    let attaque = attaquant[randomAtk];
-                    let defense = defenseur[randomDef];   
-                    defenseur.splice(randomDef,1);
-                    console.log("Le joueur attaquant " + attaque["name"] + " a éliminé le joueur " + defense["name"] + ".");
-                    console.log(defenseur);
-                    mortsDefenseur.push(defense);
-                    mortsDef++;
-                } else {
                     let attaque = attaquant[randomAtk];
                     let defense = defenseur[randomDef];   
                     attaquant.splice(randomAtk,1);
@@ -164,7 +142,6 @@ let manch = (() =>{
                     mortsAttaquant.push(attaque);
                     mortsAtk++;
             }
-            }            
         }
         console.log(attaquant.length + "reste attaquant");
         console.log(defenseur.length + " reste defenseur");
