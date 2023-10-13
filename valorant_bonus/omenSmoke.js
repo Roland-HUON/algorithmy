@@ -68,8 +68,7 @@ let teamA = 0;
 let teamB = 0;
 let manch = (() =>{
     let omenAccuracy = Math.random(0,1);
-    console.log("Omen a lancé : Smoke");
-    console.log("avantage attaquant, boost à 60/40");
+    omenAccuracy <= smoke.win? console.log("Omen a lancé : Smoke, avantage attaquant, boost à 60/40") : console.log("Omen n'a pas lancé : Smoke. Report?");
     while(attaquant.length>0 && defenseur.length>0){
         let destiny = Math.floor(Math.random()*2);
         while(deathcount <=0){
@@ -148,7 +147,6 @@ let manch = (() =>{
                     mortsAtk++;
                 }
             } else {
-                console.log("Omen n'a pas lancé : Smoke. Report?");
                 if (fate <= 0.5){
                     let attaque = attaquant[randomAtk];
                     let defense = defenseur[randomDef];   
@@ -189,9 +187,10 @@ let manch = (() =>{
 let round = 1;
 
 while (round <= 13){
-    console.log(round);
+    
     manch();
     round++;
+    console.log(round);
     attaquant = [Omen, Jett, Phoenix, Fade, Chamber];
     defenseur = [Jett, Phoenix, Fade, Chamber, Omen];
     deathcount = 0;
@@ -238,11 +237,13 @@ while (round <= 13){
     // mortsDef = 0;
     console.log(attaquant);
     console.log(defenseur);
-    if(round >=13){
+    if(round >13){
         if(teamA<teamB){
             console.log("Les défenseurs ont remporté la partie .");
+            break;
         } else {
             console.log("Les attaquants ont remporté la partie .");
+            break;
         }
     }
 }

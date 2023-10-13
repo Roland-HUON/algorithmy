@@ -20,13 +20,14 @@ class bombe{
     }
 }
 class bombeAveuglante{
-    constructor(name, win, lose){
+    constructor(name, win, lose, aveugleEnnemi){
         this.name = name;
         this.win = win;
         this.lose = lose;
+        this.aveugleEnnemi = aveugleEnnemi;
     }
 }
-let flash = new bombeAveuglante("flash", 0.6, 0.3);
+let flash = new bombeAveuglante("flash", 0.6, 0.3, 0.8);
 
 let smoke = new power("smoke", 0.5, 0.5);
 let killer = new power("killer", 0.8, 0.2);
@@ -76,6 +77,8 @@ let deathcount = 0;
 let teamA = 0;
 let teamB = 0;
 let manch = (() =>{
+    let omenAccuracy = Math.random(0,1);
+    omenAccuracy <= smoke.win? console.log("Omen a lancé : Smoke, avantage attaquant, boost à 60/40") : console.log("Omen n'a pas lancé : Smoke. Report?");
     while(attaquant.length>0 && defenseur.length>0){
         let destiny = Math.floor(Math.random()*2);
         while(deathcount <=0){
@@ -135,12 +138,14 @@ let manch = (() =>{
             let randomDef = Math.floor(Math.random()* defenseur.length);
             let fate = Math.random(0,1);
             let phoenixAccuracy = Math.random(0,1);
-            if(phoenixAccuracy<=flasher.win){
+            if(phoenixAccuracy <= flasher.win){
                 console.log("Le joueur attaquant : Phoenix a lancé : Flash.");
-                let rebond = Math.random(0,1);
-                if(rebond<=0.8){
+                let phoenixFlash = Math.random(0,1);
+                if(phoenixFlash <= flash.aveugleEnnemi){
+                    //ennemi aveuglé
                     console.log("Flash a aveuglé les ennemis !");
-                    if (fate <= flash.win){
+
+                    if(fate <= flash.win){
                         let attaque = attaquant[randomAtk];
                         let defense = defenseur[randomDef];   
                         defenseur.splice(randomDef,1);
@@ -159,44 +164,31 @@ let manch = (() =>{
                     }
                 } else {
                     console.log("Le joueur attaquant : Phoenix a lancé : Flash. Flash aveugle les alliés... Report Phoenix??? Oui ou Oui?");
-                    if (fate <= flash.lose){
-                        let attaque = attaquant[randomAtk];
-                        let defense = defenseur[randomDef];   
-                        defenseur.splice(randomDef,1);
-                        console.log("Le joueur attaquant " + attaque["name"] + " a éliminé le joueur " + defense["name"] + ".");
-                        console.log(defenseur);
-                        mortsDefenseur.push(defense);
-                        mortsDef++;
-                    } else {
-                        let attaque = attaquant[randomAtk];
-                        let defense = defenseur[randomDef];   
-                        attaquant.splice(randomAtk,1);
-                        console.log("Le joueur défenseur " + defense["name"] + " a éliminé le joueur " + attaque["name"] + ".");
-                        console.log(attaquant);
-                        mortsAttaquant.push(attaque);
-                        mortsAtk++;
+                    //alliés aveuglés
+                    if(omenAccuracy <= smoke.win){
+                        if(fate <= flash.lose){
+                            let attaque = attaquant[randomAtk];
+                            let defense = defenseur[randomDef];   
+                            defenseur.splice(randomDef,1);
+                            console.log("Le joueur attaquant " + attaque["name"] + " a éliminé le joueur " + defense["name"] + ".");
+                            console.log(defenseur);
+                            mortsDefenseur.push(defense);
+                            mortsDef++;
+                        } else {
+                            let attaque = attaquant[randomAtk];
+                            let defense = defenseur[randomDef];   
+                            attaquant.splice(randomAtk,1);
+                            console.log("Le joueur défenseur " + defense["name"] + " a éliminé le joueur " + attaque["name"] + ".");
+                            console.log(attaquant);
+                            mortsAttaquant.push(attaque);
+                            mortsAtk++;
+                        }
                     }
                 }
             } else {
-                console.log("Le joueur attaquant : Phoenix n'a pas lancé Flash... Report Phoenix?");
+                console.log("Le joueur attaquant : Phoenix n'a pas lancé : Flash.");
             }
-            if (fate <= 0.5){
-                    let attaque = attaquant[randomAtk];
-                    let defense = defenseur[randomDef];   
-                    defenseur.splice(randomDef,1);
-                    console.log("Le joueur attaquant " + attaque["name"] + " a éliminé le joueur " + defense["name"] + ".");
-                    console.log(defenseur);
-                    mortsDefenseur.push(defense);
-                    mortsDef++;
-            } else {
-                    let attaque = attaquant[randomAtk];
-                    let defense = defenseur[randomDef];   
-                    attaquant.splice(randomAtk,1);
-                    console.log("Le joueur défenseur " + defense["name"] + " a éliminé le joueur " + attaque["name"] + ".");
-                    console.log(attaquant);
-                    mortsAttaquant.push(attaque);
-                    mortsAtk++;
-            }
+                   
         }
         console.log(attaquant.length + "reste attaquant");
         console.log(defenseur.length + " reste defenseur");
@@ -219,9 +211,10 @@ let manch = (() =>{
 let round = 1;
 
 while (round <= 13){
-    console.log(round);
+    
     manch();
     round++;
+    console.log(round);
     attaquant = [Omen, Jett, Phoenix, Fade, Chamber];
     defenseur = [Jett, Phoenix, Fade, Chamber, Omen];
     deathcount = 0;
@@ -266,13 +259,13 @@ while (round <= 13){
     // mortsDefenseur=[];
     // mortsAtk = 0;
     // mortsDef = 0;
-    console.log(attaquant);
-    console.log(defenseur);
-    if(round >=13){
+    if(round >13){
         if(teamA<teamB){
             console.log("Les défenseurs ont remporté la partie .");
+            break;
         } else {
             console.log("Les attaquants ont remporté la partie .");
+            break;
         }
     }
 }
