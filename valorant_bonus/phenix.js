@@ -19,6 +19,15 @@ class bombe{
         this.chanceatk = chanceatk;
     }
 }
+class bombeAveuglante{
+    constructor(name, win, lose){
+        this.name = name;
+        this.win = win;
+        this.lose = lose;
+    }
+}
+let flash = new bombeAveuglante("flash", 0.6, 0.3);
+
 let smoke = new power("smoke", 0.5, 0.5);
 let killer = new power("killer", 0.8, 0.2);
 let flasher = new power("flasher", 0.5, 0.5);
@@ -125,6 +134,52 @@ let manch = (() =>{
             let randomAtk = Math.floor(Math.random()* attaquant.length);
             let randomDef = Math.floor(Math.random()* defenseur.length);
             let fate = Math.random(0,1);
+            let phoenixAccuracy = Math.random(0,1);
+            if(phoenixAccuracy<=flasher.win){
+                console.log("Le joueur attaquant : Phoenix a lancé : Flash.");
+                let rebond = Math.random(0,1);
+                if(rebond<=0.8){
+                    console.log("Flash a aveuglé les ennemis !");
+                    if (fate <= flash.win){
+                        let attaque = attaquant[randomAtk];
+                        let defense = defenseur[randomDef];   
+                        defenseur.splice(randomDef,1);
+                        console.log("Le joueur attaquant " + attaque["name"] + " a éliminé le joueur " + defense["name"] + ".");
+                        console.log(defenseur);
+                        mortsDefenseur.push(defense);
+                        mortsDef++;
+                    } else {
+                        let attaque = attaquant[randomAtk];
+                        let defense = defenseur[randomDef];   
+                        attaquant.splice(randomAtk,1);
+                        console.log("Le joueur défenseur " + defense["name"] + " a éliminé le joueur " + attaque["name"] + ".");
+                        console.log(attaquant);
+                        mortsAttaquant.push(attaque);
+                        mortsAtk++;
+                    }
+                } else {
+                    console.log("Le joueur attaquant : Phoenix a lancé : Flash. Flash aveugle les alliés... Report Phoenix??? Oui ou Oui?");
+                    if (fate <= flash.lose){
+                        let attaque = attaquant[randomAtk];
+                        let defense = defenseur[randomDef];   
+                        defenseur.splice(randomDef,1);
+                        console.log("Le joueur attaquant " + attaque["name"] + " a éliminé le joueur " + defense["name"] + ".");
+                        console.log(defenseur);
+                        mortsDefenseur.push(defense);
+                        mortsDef++;
+                    } else {
+                        let attaque = attaquant[randomAtk];
+                        let defense = defenseur[randomDef];   
+                        attaquant.splice(randomAtk,1);
+                        console.log("Le joueur défenseur " + defense["name"] + " a éliminé le joueur " + attaque["name"] + ".");
+                        console.log(attaquant);
+                        mortsAttaquant.push(attaque);
+                        mortsAtk++;
+                    }
+                }
+            } else {
+                console.log("Le joueur attaquant : Phoenix n'a pas lancé Flash... Report Phoenix?");
+            }
             if (fate <= 0.5){
                     let attaque = attaquant[randomAtk];
                     let defense = defenseur[randomDef];   
